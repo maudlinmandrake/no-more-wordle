@@ -11,11 +11,11 @@ console.log(rightGuessString);
 function initBoard() {
     let board = document.getElementById("game-board");
 
-    for (i = 0; i < NUMBER_OF_GUESSES; i++) {
+    for (let i = 0; i < NUMBER_OF_GUESSES; i++) {
         let row = document.createElement("div")
         row.className = "letter-row"
 
-        for (j = 0; j < 5; j++) {
+        for (let j = 0; j < 5; j++) {
             let box = document.createElement("div")
             box.className = "letter-box"
             row.appendChild(box)
@@ -25,4 +25,4 @@ function initBoard() {
     }
 }
 
-initBoard()
+initBoard();
