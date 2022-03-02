@@ -76,3 +76,64 @@ function deleteLetter() {
     currentGuess.pop()
     nextLetter -= 1
 }
+
+function checkGuess() {
+    let row = document.getElementsByClassName("letter-row")[6 - guessesRemaining]
+    let guessString = ""
+    let rightGuess = Array.from(rightGuessString)
+
+    for (const val of currentGuess) {
+        guessString += val
+    }
+    
+    if (guessString.length != 5) {
+        alert("Not enough letters!")
+        return
+    }
+
+    if (!WORDS.includes(guessString)) {
+        alert("Word not in list")
+        return
+    }
+
+    for (let i = 0; i < 5; i++) {
+        let letterColor = ""
+        let box = row.children[i]
+        let letter = currentGuess[i]
+        
+        let letterPosition = rightGuess.indexOf(currentGuess[i])
+        // is letter in the correct guess
+        if (letterPosition === -1) {
+            letterColor = 'grey'
+        } else {
+            if (currentGuess[i] === rightGuess[i]) {
+                letterColor = 'green'
+            } else {
+                letterColor = 'yellow'
+            }
+
+            rightGuess[letterPosition] = "#"
+        }
+
+        let delay = 250 * i
+        setTimeout( () => {
+            box.getElementsByClassName.backgroundColor = letterColor
+            shadeKeyBoard (letter, letterColor)
+        }, delay )
+    }
+
+    if (guessString === rightGuessString) {
+        alert("You guessed right! Game over.")
+        guessesRemaining = 0
+        return
+    } else {
+        guessesRemaining -= 1;
+        currentGuess= [];
+        nextLetter = 0;
+
+        if (guessesRemaining === 0) {
+            alert("You've run out of guesses, game over")
+            alert(`The right word was: "${rightGuessString}"`)
+        }
+    }
+}
